@@ -1,0 +1,35 @@
+{
+  "name": "enterprise-d-night-shift",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run build:shared && npm run dev --workspace=@enterprise-d/client",
+    "dev:server": "npm run build:shared && npm run dev --workspace=@enterprise-d/server",
+    "lint": "biome lint .",
+    "typecheck": "npm run build:shared && npm run typecheck --workspaces --if-present",
+    "test": "node --test packages/rules/src/index.test.ts apps/server/src/app.test.ts",
+    "test:failure-regression": "bash scripts/verify-test-failure.sh",
+    "build:shared": "npm run build --workspace=@enterprise-d/contracts && npm run build --workspace=@enterprise-d/rules",
+    "build:client": "npm run build --workspace=@enterprise-d/client",
+    "build:server": "npm run build --workspace=@enterprise-d/server",
+    "build": "npm run build:shared && npm run build:server && npm run build:client",
+    "validate": "npm run lint && npm run typecheck && npm test && npm run test:failure-regression && npm run build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "typescript": "7.0.2",
+    "vite": "8.3.4"
+  }
+}
