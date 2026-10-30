@@ -9,7 +9,7 @@
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@babylonjs/core": "9.31.0",
+    "@babylonjs/core": "9.32.1",
     "@enterprise-d/rules": "0.1.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
